@@ -25,9 +25,8 @@ chmod 600 ~/.ssh/id_rsa
 
 rm -rf $RUNNER_TEMP/infra-as-code-repo
 git clone git@github.com:$GITHUB_ORG_AND_REPO.git $RUNNER_TEMP/infra-as-code-repo
-wget https://raw.githubusercontent.com/simplycubed/gitops-update/master/replace-key.py
+python replace-key.py --file $RUNNER_TEMP/infra-as-code-repo/$FILE_NAME --key $KEY --value $VALUE
 cd $RUNNER_TEMP/infra-as-code-repo
-python replace-key.py --file $FILE_NAME --key $KEY --value $VALUE
 git add .
 git commit -m "Release of key $KEY in $FILE_NAME"
 git show HEAD

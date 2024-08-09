@@ -23,12 +23,8 @@ runs:
     - uses: actions/setup-python@v5
       with:
         python-version: '3.12' 
-    - name: Upgrade pip
-      run: pip install --upgrade pip
-      shell: bash
-    - name: Install dependencies
-      run: |
-        if [ -f ${{ github.action_path }}/requirements.txt ];then pip install -r ${{ github.action_path }}/requirements.txt; fi
+        cache: pip
+    - run: pip install -r requirements.txt
       shell: bash
     - run: ${{ github.action_path }}/run.sh "${{ inputs.filename }}" "${{ inputs.key }}" "${{ inputs.value }}" "${{ inputs.github-deploy-key }}" "${{ inputs.github-org-and-repo }}"
       shell: bash
